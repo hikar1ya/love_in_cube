@@ -31,7 +31,7 @@ def get_all():
         result.append(item)
     #return jsonify({'result': result})
     #return result
-    return render_template("index.html")
+    return render_template("index.html", result = result)
 
 def get_by_id(id):
     collection = connect_to_database()
