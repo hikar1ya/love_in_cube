@@ -12,8 +12,8 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    fetch("http://127.0.0.1:5000/catalog")
-    .then((response) => response.json())
+    fetch('/catalog')
+    .then((response => response.json())
     .then((json) => {
       this.setState({
         loading: false,

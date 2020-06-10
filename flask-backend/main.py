@@ -23,12 +23,13 @@ def connect_to_database():
 @app.route('/catalog', methods=['GET'])
 def get_all():
     collection = connect_to_database()
-    my_cursor = collection.find({"_id" : ObjectId('5eb3df1289fdccf6ec6e6152')})
+    my_cursor = collection.find({})
 
     result = []
     for item in my_cursor:
         item["_id"] = str(item["_id"])
         result.append(item)
+    #result = 42
     #return jsonify({'result': result})
     #return result
     return render_template("index.html", result = result)
