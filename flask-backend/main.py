@@ -23,7 +23,7 @@ def connect_to_database():
 @app.route('/catalog', methods=['GET'])
 def get_all():
     collection = connect_to_database()
-    my_cursor = collection.find({})
+    my_cursor = collection.find({"_id" : ObjectId('5eb3df1289fdccf6ec6e6152')})
 
     result = []
     for item in my_cursor:
