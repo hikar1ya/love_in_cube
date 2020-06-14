@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import List from './components/List';
 
 class App extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -11,19 +13,19 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount(){
-    fetch('/catalog')
-    .then((response => response.json())
-    .then((json) => {
-      this.setState({
-        loading: false,
-        list: json.results,
+  componentDidMount() {
+    fetch('http://localhost:5000/catalog')
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({
+          loading: false,
+          list: json,
+        });
       });
-    });
   }
 
   render() {
-  return <div>Alo kurluk: {this.state.loading ? "Loading..." : "Everything is ok!"}</div>;
+    return <div>{this.state.loading ? "Loading..." : <List items={this.state.list} />}</div>;
   }
 }
 
