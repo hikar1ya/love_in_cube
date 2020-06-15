@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import List from './components/List';
+import AppBar from './components/AppBar';
 
 class App extends React.Component {
 
@@ -25,7 +25,10 @@ class App extends React.Component {
   }
 
   render() {
-    return <div>{this.state.loading ? "Loading..." : <List items={this.state.list} />}</div>;
+    return <>
+      <AppBar />
+      <List items={this.state.list} />
+    </>;
   }
 }
 
