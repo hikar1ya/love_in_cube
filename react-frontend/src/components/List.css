@@ -1,0 +1,14 @@
+.giftName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.button {
+    align-self: center;
+}
+
+.grid {
+    padding-left: 20;
+}
