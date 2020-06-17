@@ -2,10 +2,12 @@ from bson import ObjectId
 
 import gift
 from flask import Flask, jsonify, render_template, Response, json
+from flask_cors import CORS
 import pymongo
 import ssl
 
 app = Flask(__name__, template_folder='templates')
+CORS(app)
 app.config['JSON_AS_ASCII'] = False
 
 @app.route('/')
@@ -24,15 +26,11 @@ def connect_to_database():
 def get_all():
     collection = connect_to_database()
     my_cursor = collection.find({})
-
     result = []
     for item in my_cursor:
         item["_id"] = str(item["_id"])
         result.append(item)
-    #result = 42
-    #return jsonify({'result': result})
-    #return result
-    return render_template("index.html", result = result)
+    return jsonify({'result': result})
 
 def get_by_id(id):
     collection = connect_to_database()
