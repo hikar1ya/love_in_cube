@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,19 +30,19 @@ export default function ProminentAppBar() {
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <Typography className={classes.title} variant="h5" noWrap>
-           Love In Cube
+            Love In Cube
           </Typography>
-          <Button color="inherit">
-              Подарки
+          <Button color="black">
+            <Link to="/">Подарки</Link>
           </Button>
-          <Button color="inherit">
-              О нас
+          <Button color="black">
+            <Link to="/about">О нас</Link>
           </Button>
-          <Button color="inherit">
-              Как заказать
+          <Button color="black">
+            <Link to="/how_to_order">Как заказать</Link>
           </Button>
-          <Button color="inherit">
-              Корзина
+          <Button color="black">
+            <Link to="/basket">Корзина</Link>
           </Button>
         </Toolbar>
       </AppBar>
