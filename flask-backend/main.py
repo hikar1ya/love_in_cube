@@ -45,7 +45,7 @@ def order_page():
 def send_mail(info):
     s = ''
     sum = 0
-    for i in range(2, len(info)):
+    for i in range(3, len(info)):
         k = get_by_id(info[i])
         m = k[0]["name"]
         s += str(m) + ', '
@@ -57,11 +57,12 @@ def send_mail(info):
             <p><strong>Новый заказ</strong> на сумму {} рублей<br>
                Телефон: {}<br>
                Имя {}<br>
-               В заказ входит: <br>{}
+               В заказ входит: <br>{}<br>
+               Комментарий: {}
             </p>
           </body>
         </html>
-        """.format(sum, info[1], infp[0], s)
+        """.format(sum, info[1], infp[0], s, info[2])
 
     # формирование сообщения
     msg = MIMEText(text, 'html', 'utf-8')
