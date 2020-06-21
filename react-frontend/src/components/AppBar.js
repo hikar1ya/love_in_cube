@@ -11,10 +11,10 @@ export default function ProminentAppBar() {
       <div style={{ textAlign: 'center' }}>
         <Typography variant='h4' style={{ fontFamily: 'cursive' }}>Love In Cube</Typography>
       </div>
-      <div style={{ marginLeft: '135px' }}>
-        <Button color="black">
-          <Link to="/">Подарки</Link>
-        </Button>
+      <div style={{ marginLeft: 'auto' }}>
+        <Link to="/">
+          <Button color="black">Подарки</Button>
+        </Link>
         <Link to="/about">
           <Button color="black">О нас</Button>
         </Link>

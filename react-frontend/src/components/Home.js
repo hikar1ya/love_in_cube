@@ -12,8 +12,6 @@ import Container from '@material-ui/core/Container'
 import { Link } from 'react-router-dom'
 import './List.css'
 
-
-
 export default class Home extends React.Component {
 
     constructor(props) {
@@ -21,7 +19,23 @@ export default class Home extends React.Component {
         this.state = {
             loading: true,
             list: [],
+            basket: [],
         };
+    }
+
+
+    addBasket = (id) => {
+        const basket = this.state.basket
+
+        const index = basket.findIndex(x => x === id)
+
+        if (index === -1) {
+            basket.push(id)
+            this.setState({
+                basket
+            })
+            localStorage.setItem('basket', JSON.stringify(basket))
+        }
     }
 
     componentDidMount() {
@@ -31,6 +45,7 @@ export default class Home extends React.Component {
                 this.setState({
                     loading: false,
                     list: json,
+                    basket: localStorage.getItem('basket') ? JSON.parse(localStorage.getItem('basket')) : []
                 });
             });
     }
@@ -41,8 +56,8 @@ export default class Home extends React.Component {
             <Container>
                 <Grid container spacing={10} >
                     {this.state.list.map((gift) => (
-                        <Grid item xs={12} sm={6} md={4} lg={4} spacing={10}>
-                            <Card key={gift._id}>
+                        <Grid key={gift._id} item xs={12} sm={6} md={4} lg={4} spacing={10}>
+                            <Card >
                                 <CardActionArea>
                                     <CardMedia image={gift.image}
                                         style={{ height: '250px' }} title="Gift Card" />
@@ -61,9 +76,7 @@ export default class Home extends React.Component {
                                             Что внутри?
                                     </Button>
                                     </Link>
-                                    <Button onClick={() => {
-                                        fetch('http://localhost:5000/add', { method: "POST", body: gift._id })
-                                    }} size="small" color="primary" className="button">
+                                    <Button onClick={() => this.addBasket(gift._id)} size="small" color="primary" className="button">
                                         Добавить в корзину
                                 </Button>
                                 </CardActions>

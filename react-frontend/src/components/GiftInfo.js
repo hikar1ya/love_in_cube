@@ -39,7 +39,7 @@ export default class GiftInfo extends React.Component {
                             image={_gift.image}
                             title="Подарок"
                         />
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '500px', flex: '1' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', flex: '1' }}>
                             <CardContent style={{ flex: '1 0 auto' }}>
                                 <Typography component="h5" variant="h5">
                                     {_gift.name}
@@ -62,11 +62,9 @@ export default class GiftInfo extends React.Component {
                                 </Button>
                             </CardActions>
                         </div>
-                        
                     </Card>
                 ))}
             </Container>
-
         );
     }
 }
