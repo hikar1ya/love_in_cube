@@ -1,5 +1,6 @@
 import React from 'react';
 import './List.css'
+import { Container } from '@material-ui/core';
 
 
 
@@ -7,7 +8,15 @@ export default class Basket extends React.Component {
 
     render() {
         return (
-            <div>About</div>
+            <Container>
+                <div>
+                    <p>Что нужно ценить прежде всего?</p>
+                    <p>Любовь.</p>
+                    <p>Мы ценим вашу любовь к близким людям. Поэтому с заботой приготовили для вас маленькие выражения этого прекрасного чувства.</p>
+                    <p>Будем знакомы!</p>
+                    <p>Мы - мастерская подарка Love In Cube, или Love³ по-научному. Ведь правильно выразить любовь - тоже наука.</p>
+                </div>
+            </Container>
         );
     }
 }
