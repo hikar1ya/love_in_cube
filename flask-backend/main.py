@@ -37,7 +37,7 @@ def index():
     return jsonify(result)
 
 items = []
-@app.route('/add', methods=['POST'])
+@app.route('/addcatalog', methods=['POST'])
 def catalog():
     id = request.data.decode('utf-8')
     if 'items' in session:
