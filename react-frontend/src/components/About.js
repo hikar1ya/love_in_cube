@@ -10,6 +10,9 @@ export default class Basket extends React.Component {
         return (
             <Container>
                 <div>
+                    <img src="./img/photo1.jpg" weight="100%" height="30%"></img>
+                </div>
+                <div font="">
                     <p>Что нужно ценить прежде всего?</p>
                     <p>Любовь.</p>
                     <p>Мы ценим вашу любовь к близким людям. Поэтому с заботой приготовили для вас маленькие выражения этого прекрасного чувства.</p>

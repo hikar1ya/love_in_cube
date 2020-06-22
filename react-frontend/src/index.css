@@ -1,13 +1,23 @@
+
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "19279", 'Comic Sans MS', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #B89884;
 }
 
+
+
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: "19279",'Comic Sans MS', cursive;
 }
+
+@font-face {
+  font-family: "19279"; /* Гарнитура шрифта */
+  src: url("/components/fonts/19279.ttf"); /* Путь к файлу со шрифтом */
+  font-style: normal; 
+  font-weight: normal; 
+ }
