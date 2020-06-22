@@ -9,14 +9,8 @@ import smtplib
 import ssl
 
 app = Flask(__name__, template_folder='templates')
-app.config["SECRET_KEY"] = '88024e1b4d3d7a4d7c2f839092334feb1d4c8c36'
 CORS(app)
 app.config['JSON_AS_ASCII'] = False
-
-@app.before_request
-def enable_session_timeout():
-    session.permanent = True  # set session to use PERMANENT_SESSION_LIFETIME
-    session.modified = True   # reset the session timer on every request
 
 def connect_to_database():
     client = MongoClient(
@@ -36,6 +30,7 @@ def index():
         result.append(item)
     return jsonify(result)
 
+<<<<<<< HEAD
 items = []
 @app.route('/addcatalog', methods=['POST'])
 def catalog():
@@ -50,33 +45,45 @@ def catalog():
 
 
 @app.route('/cart', methods=['GET'])
+=======
+@app.route('/cart', methods=['GET', 'POST'])
+>>>>>>> 12878bf24ed7667a8835aa7b3a7024960315befd
 def cart():
-    order = []
-    for id in session['items']:
+    for id in request.data:
         order.append(get_by_id(id))
     return jsonify(order)
 
-@app.route('/order', methods=['GET'])
+@app.route('/order', methods=['POST'])
 def order_page():
-    send_mail(1,1)
+    list = request.data.decode('utf-8').split(',')
+    send_mail(list.join(' '))
     return "Отправка прошла"
 
-def send_mail(sum, phone):
+def send_mail(info):
+    s = ''
+    sum = 0
+    for i in range(3, len(info)):
+        k = get_by_id(info[i])
+        m = k[0]["name"]
+        s += str(m) + ', '
+        sum += k[0]['price']
     # текст письма с заказом
     text = """\
         <html>
           <body>
             <p><strong>Новый заказ</strong> на сумму {} рублей<br>
                Телефон: {}<br>
-               Что-то еще {}<br><br>{}
+               Имя {}<br>
+               В заказ входит: <br>{}<br>
+               Комментарий: {}
             </p>
           </body>
         </html>
-        """.format(sum, phone, "new order", "text")
+        """.format(sum, info[1], infp[0], s, info[2])
 
     # формирование сообщения
     msg = MIMEText(text, 'html', 'utf-8')
-    msg['Subject'] = Header('Новый заказ на сумму N', 'utf-8')
+    msg['Subject'] = Header('Новый заказ на сумму {} рублей'.format(sum), 'utf-8')
 
     # отправка сообщения
     try:
@@ -90,10 +97,6 @@ def send_mail(sum, phone):
 @app.route('/gift', methods=['GET', 'POST'])
 def gift():
     id = request.data.decode('utf-8')
-    gift_id(id)
-
-@app.route('/gift/<id>', methods=['GET'])
-def gift_id(id):
     return jsonify(get_by_id(id))
 
 def get_by_id(id):
