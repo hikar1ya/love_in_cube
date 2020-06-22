@@ -8,7 +8,7 @@ from pymongo import MongoClient
 import smtplib
 import ssl
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(name, template_folder='templates')
 CORS(app)
 app.config['JSON_AS_ASCII'] = False
 
@@ -32,7 +32,11 @@ def index():
 
 @app.route('/cart', methods=['GET', 'POST'])
 def cart():
-    for id in request.data:
+    order = []
+    list = request.data.decode('utf-8').split(',')
+    if list[0] == '':
+        return 'empty'
+    for id in list:
         order.append(get_by_id(id))
     return jsonify(order)
 
@@ -52,17 +56,17 @@ def send_mail(info):
         sum += k[0]['price']
     # текст письма с заказом
     text = """\
-        <html>
-          <body>
+    <html>
+        <body>
             <p><strong>Новый заказ</strong> на сумму {} рублей<br>
-               Телефон: {}<br>
-               Имя {}<br>
+            Телефон: {}<br>
+            Имя {}<br>
                В заказ входит: <br>{}<br>
                Комментарий: {}
             </p>
-          </body>
-        </html>
-        """.format(sum, info[1], info[0], s, info[2])
+        </body>
+    </html>
+    """.format(sum, info[1], info[0], s, info[2])
 
     # формирование сообщения
     msg = MIMEText(text, 'html', 'utf-8')
