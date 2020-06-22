@@ -49,11 +49,11 @@ def order_page():
 def send_mail(info):
     s = ''
     sum = 0
-    for i in range(2, len(info)):
+    for i in range(3, len(info)):
         k = get_by_id(info[i])
-        m = k[0]["name"]
+        m = k["name"]
         s += str(m) + ', '
-        sum += k[0]['price']
+        sum += k['price']
     # текст письма с заказом
     text = """\
     <html>
