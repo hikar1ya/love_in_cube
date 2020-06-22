@@ -8,7 +8,7 @@ from pymongo import MongoClient
 import smtplib
 import ssl
 
-app = Flask(name, template_folder='templates')
+app = Flask(__name__, template_folder='templates')
 CORS(app)
 app.config['JSON_AS_ASCII'] = False
 
