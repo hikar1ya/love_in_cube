@@ -30,24 +30,7 @@ def index():
         result.append(item)
     return jsonify(result)
 
-<<<<<<< HEAD
-items = []
-@app.route('/addcatalog', methods=['POST'])
-def catalog():
-    id = request.data.decode('utf-8')
-    if 'items' in session:
-        session['items'] = session.get('items').append(id)
-        session.modified = True
-    else:
-        session['items'] = items.append(id)
-        session.modified = True
-    return jsonify(session['items'])
-
-
-@app.route('/cart', methods=['GET'])
-=======
 @app.route('/cart', methods=['GET', 'POST'])
->>>>>>> 12878bf24ed7667a8835aa7b3a7024960315befd
 def cart():
     for id in request.data:
         order.append(get_by_id(id))
@@ -56,13 +39,13 @@ def cart():
 @app.route('/order', methods=['POST'])
 def order_page():
     list = request.data.decode('utf-8').split(',')
-    send_mail(list.join(' '))
+    send_mail(list)
     return "Отправка прошла"
 
 def send_mail(info):
     s = ''
     sum = 0
-    for i in range(3, len(info)):
+    for i in range(2, len(info)):
         k = get_by_id(info[i])
         m = k[0]["name"]
         s += str(m) + ', '
@@ -79,7 +62,7 @@ def send_mail(info):
             </p>
           </body>
         </html>
-        """.format(sum, info[1], infp[0], s, info[2])
+        """.format(sum, info[1], info[0], s, info[2])
 
     # формирование сообщения
     msg = MIMEText(text, 'html', 'utf-8')
@@ -94,10 +77,10 @@ def send_mail(info):
     finally:
         smtpObj.quit()
 
-@app.route('/gift', methods=['GET', 'POST'])
+@app.route('/get-gift', methods=['GET', 'POST'])
 def gift():
     id = request.data.decode('utf-8')
-    return jsonify(get_by_id(id))
+    return jsonify([get_by_id(id)])
 
 def get_by_id(id):
     collection = connect_to_database()
@@ -106,6 +89,6 @@ def get_by_id(id):
     for item in my_cursor:
         item["_id"] = str(item["_id"])
         result.append(item)
-    return (result)
+    return (result[0])
 
 app.run()
